@@ -82,15 +82,15 @@ case "$locale_option" in
   "2")
     sed -i 's/#ru_RU.UTF-8/ru_RU.UTF-8/g' /etc/locale.gen
     echo 'LANG=ru_RU.UTF-8' > /etc/locale.conf
+    echo 'KEYMAP=ru' > /etc/vconsole.conf
+    echo 'FONT=cyr-sun16' >> /etc/vconsole.conf
+    setfont cyr-sun16
     ;;
   *)
     echo "Неверный выбор локализации"
     ;;
 esac
 
-echo 'KEYMAP=er' > /etc/vconsole.conf
-echo 'FONT=cyr-sun16' >> /etc/vconsole.conf
-setfont cyr-sun16
 locale-gen >/dev/null 2>&1
 RETVAL=$?
 
@@ -1359,7 +1359,7 @@ displaymanager='systemctl enable sddm --force'
           "6" )
 update='pacman -Syy'
 
-desktop='pacstrap -i /mnt xorg xorg-server xorg-xwayland plasma cups konsole dolphin kmix discover cups lightdm lightdm-slick-greeter firefox packagekit-qt5 bluez bluez-utils --noconfirm'
+desktop='pacstrap -i /mnt xorg xorg-server xorg-xwayland plasma cups konsole dolphin cups lightdm lightdm-slick-greeter firefox packagekit-qt5 bluez bluez-utils spectacle skanlite --noconfirm'
 
 displaymanager='systemctl enable lightdm --force'
           ;;
@@ -1440,15 +1440,15 @@ arch-chroot /mnt /bin/bash -c "sed -i s/'#en_US.UTF-8'/'en_US.UTF-8'/g /etc/loca
 #arch-chroot /mnt /bin/bash -c "sed -i s/'#ru_RU.UTF-8'/'ru_RU.UTF-8'/g /etc/locale.gen"
 arch-chroot /mnt /bin/bash -c "locale-gen"
 #arch-chroot /mnt /bin/bash -c "echo 'LANG=ru_RU.UTF-8' > /etc/locale.conf"
-arch-chroot /mnt /bin/bash -c "echo 'KEYMAP=ru' > /etc/vconsole.conf"
-arch-chroot /mnt /bin/bash -c "echo 'FONT=cyr-sun16' >> /etc/vconsole.conf"
+#arch-chroot /mnt /bin/bash -c "echo 'KEYMAP=ru' > /etc/vconsole.conf"
+#arch-chroot /mnt /bin/bash -c "echo 'FONT=cyr-sun16' >> /etc/vconsole.conf"
 arch-chroot /mnt /bin/bash -c "echo 'ARCH' > /etc/hostname"
 arch-chroot /mnt /bin/bash -c "echo '127.0.0.1 localhost' > /etc/hosts"
 arch-chroot /mnt /bin/bash -c "echo '::1       localhost' >> /etc/hosts"
 arch-chroot /mnt /bin/bash -c "echo '127.0.0.1 ARCH.localdomain ARCH' >> /etc/hosts"
 arch-chroot /mnt /bin/bash -c "sed -i s/'#ParallelDownloads = 5'/'ParallelDownloads = 10'/g /etc/pacman.conf"
 arch-chroot /mnt /bin/bash -c "sed -i s/'#VerbosePkgLists'/'VerbosePkgLists'/g /etc/pacman.conf"
-arch-chroot /mnt /bin/bash -c "sed -i s/'#Color'/'ILoveCandy'/g /etc/pacman.conf"
+#arch-chroot /mnt /bin/bash -c "sed -i s/'#Color'/'ILoveCandy'/g /etc/pacman.conf"
 sed -i "/\[multilib\]/,/Include/"'s/^#//' /mnt/etc/pacman.conf
 arch-chroot /mnt /bin/bash -c "sed -i s/'# %wheel ALL=(ALL:ALL) ALL'/'%wheel ALL=(ALL:ALL) ALL'/g /etc/sudoers"
 echo "root:$password" | arch-chroot /mnt chpasswd
