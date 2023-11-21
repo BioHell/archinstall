@@ -1435,8 +1435,8 @@ echo '
               ─────────────────────────────────────────────────────────────────────────────────────|
 '
 sleep 4
-pacman -Syy reflector archlinux-keyring --noconfirm
-reflector --sort rate -l 20 --save /etc/pacman.d/mirrorlist
+pacman -Syy rate-mirrors archlinux-keyring --noconfirm
+rate-mirrors arch | sudo tee /etc/pacman.d/mirrorlist.
 pacman -Syy
 #---------------PACSTRAP-----------------------------------------------
 ${kernel}
